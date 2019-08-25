@@ -1,7 +1,7 @@
 package io.github.mrzepisko.varianteditor.web;
 
 import io.github.mrzepisko.varianteditor.VariantRepository;
-import io.github.mrzepisko.varianteditor.dto.Variant;
+import io.github.mrzepisko.varianteditor.model.Variant;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

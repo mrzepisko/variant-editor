@@ -1,6 +1,6 @@
 package io.github.mrzepisko.varianteditor;
 
-import io.github.mrzepisko.varianteditor.dto.Variant;
+import io.github.mrzepisko.varianteditor.model.Variant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

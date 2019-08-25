@@ -1,6 +1,6 @@
 package io.github.mrzepisko.varianteditor.web;
 
-import io.github.mrzepisko.varianteditor.dto.User;
+import io.github.mrzepisko.varianteditor.model.User;
 import io.github.mrzepisko.varianteditor.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

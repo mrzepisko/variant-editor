@@ -1,7 +1,7 @@
 package io.github.mrzepisko.varianteditor.service;
 
 import io.github.mrzepisko.varianteditor.UserRepository;
-import io.github.mrzepisko.varianteditor.dto.User;
+import io.github.mrzepisko.varianteditor.model.User;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

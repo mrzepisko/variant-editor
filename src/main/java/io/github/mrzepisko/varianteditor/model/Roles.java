@@ -1,4 +1,4 @@
-package io.github.mrzepisko.varianteditor.dto;
+package io.github.mrzepisko.varianteditor.model;
 
 public enum Roles {
     USER("USER"),

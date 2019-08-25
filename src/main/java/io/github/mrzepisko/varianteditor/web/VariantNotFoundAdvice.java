@@ -1,5 +1,6 @@
-package io.github.mrzepisko.varianteditor;
+package io.github.mrzepisko.varianteditor.web;
 
+import io.github.mrzepisko.varianteditor.web.VariantNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

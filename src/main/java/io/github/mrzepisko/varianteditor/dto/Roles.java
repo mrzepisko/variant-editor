@@ -1,6 +1,4 @@
-package io.github.mrzepisko.varianteditor.security;
-
-import lombok.val;
+package io.github.mrzepisko.varianteditor.dto;
 
 public enum Roles {
     USER("USER"),

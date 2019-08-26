@@ -8,8 +8,10 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -33,7 +35,7 @@ public class Variant {
     @NonNull @Column(nullable = false, updatable = false)
     private String opis;
 
-/*
+
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    private User user;*/
+    private User user;
 }

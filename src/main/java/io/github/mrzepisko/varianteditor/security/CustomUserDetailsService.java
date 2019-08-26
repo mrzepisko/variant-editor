@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-//@Transactional
+@Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
     private UserRepository repository;
@@ -31,10 +31,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByIdentifier(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("User not found %s", username));
-        }
+        User user = repository.findByIdentifier(username)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User not found %s", username)));
+
         return new org.springframework.security.core.userdetails.User(
                 user.getIdentifier(),
                 user.getPassword(),

@@ -1,4 +1,4 @@
-package io.github.mrzepisko.varianteditor;
+package io.github.mrzepisko.varianteditor.dao;
 
 import io.github.mrzepisko.varianteditor.model.Variant;
 import lombok.extern.slf4j.Slf4j;

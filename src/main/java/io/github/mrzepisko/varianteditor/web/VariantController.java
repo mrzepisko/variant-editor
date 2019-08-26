@@ -1,9 +1,7 @@
 package io.github.mrzepisko.varianteditor.web;
 
-import io.github.mrzepisko.varianteditor.UserRepository;
-import io.github.mrzepisko.varianteditor.VariantRepository;
 import io.github.mrzepisko.varianteditor.model.Variant;
-import io.github.mrzepisko.varianteditor.service.UserService;
+import io.github.mrzepisko.varianteditor.service.VariantEditorService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,32 +15,29 @@ import java.util.List;
 
 @RestController
 public class VariantController {
-    private final VariantRepository variantRepository;
-    private final UserService userService;
+    private final VariantEditorService service;
 
-    public VariantController(VariantRepository variantRepository, UserService userService) {
-        this.variantRepository = variantRepository;
-        this.userService = userService;
+    public VariantController(VariantEditorService userService) {
+        this.service = userService;
     }
 
     @PostMapping("/variants")
     private Variant newVariant(@RequestBody Variant newVariant) {
-        return variantRepository.save(newVariant);
+        return service.create(newVariant);
     }
 
-    @GetMapping("/variants") //TODO current user
+    @GetMapping("/variants")
     private @ResponseBody List<Variant> getVariants() {
-        return userService.getUserVariants();
+        return service.getUserVariants();
     }
 
     @GetMapping("/variants/{id}")
     private Variant getVariant(@PathVariable Long id) throws VariantNotFoundException {
-        return variantRepository.findById(id)
-                .orElseThrow(VariantNotFoundException::new);
+        return service.find(id).orElseThrow(VariantNotFoundException::new);
     }
 
     @PutMapping("/variants/{id}/assign")
     private Variant assignVariant(@PathVariable Long id, String userIdentifier) throws VariantNotFoundException, UsernameNotFoundException {
-        return userService.assignVariant(id, userIdentifier);
+        return service.assignVariant(id, userIdentifier);
     }
 }

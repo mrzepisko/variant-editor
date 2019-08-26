@@ -1,4 +1,4 @@
-package io.github.mrzepisko.varianteditor;
+package io.github.mrzepisko.varianteditor.dao;
 
 import io.github.mrzepisko.varianteditor.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

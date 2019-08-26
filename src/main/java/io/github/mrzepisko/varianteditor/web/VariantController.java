@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class VariantController {
     }
 
     @GetMapping("/variants") //TODO current user
-    private List<Variant> getVariants() {
+    private @ResponseBody List<Variant> getVariants() {
         return userService.getUserVariants();
     }
 

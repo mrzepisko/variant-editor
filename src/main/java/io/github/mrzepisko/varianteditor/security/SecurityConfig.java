@@ -1,6 +1,5 @@
 package io.github.mrzepisko.varianteditor.security;
 
-import io.github.mrzepisko.varianteditor.model.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -28,9 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {//TODO FIXME c
     private AuthenticationProvider authenticationProvider;
 
     @Autowired
-    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+    private AuthenticationFailureHandler customAuthenticationFailureHandler;
     @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -112,7 +112,6 @@ public class VariantEditorServiceImplTest extends BaseTest {
     @Test(expected = UserNotFoundException.class)
     public void assignVariantTestNoUser() throws VariantNotFoundException, UserNotFoundException {
         when(userRepository.findByIdentifier(anyString())).thenReturn(Optional.empty());
-        when(variantRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         service.assignVariant(1L, "any");
     }

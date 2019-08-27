@@ -10,7 +10,7 @@ import java.util.Collections;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class BaseTest {
+public class AbstractServiceTest {
 
     protected void mockApplicationUser() {
         Authentication authentication = mock(Authentication.class);

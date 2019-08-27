@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(
         value = HttpStatus.BAD_REQUEST,
-        reason = "@exception.duplicated.variant@")
+        reason = "${exception.duplicated.variant}")
 public class DuplicatedVariantException extends Exception {
 
 }

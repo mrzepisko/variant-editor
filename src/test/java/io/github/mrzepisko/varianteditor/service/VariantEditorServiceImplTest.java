@@ -1,6 +1,6 @@
 package io.github.mrzepisko.varianteditor.service;
 
-import io.github.mrzepisko.varianteditor.BaseTest;
+import io.github.mrzepisko.varianteditor.AbstractServiceTest;
 import io.github.mrzepisko.varianteditor.dao.UserRepository;
 import io.github.mrzepisko.varianteditor.dao.VariantRepository;
 import io.github.mrzepisko.varianteditor.model.User;
@@ -39,7 +39,7 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class VariantEditorServiceImplTest extends BaseTest {
+public class VariantEditorServiceImplTest extends AbstractServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
     @Mock

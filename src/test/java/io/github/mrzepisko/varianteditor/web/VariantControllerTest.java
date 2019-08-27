@@ -123,22 +123,11 @@ public class VariantControllerTest extends AbstractControllerTest {
         checkResultData(v, result);
     }
 
-    @Test
-    public void newVariantDuplicates() throws Exception {
-        Variant v = new Variant(34563456L, "fyikty", "dtfbyj", "dfghdfgnl;kjth");
-        when(variantEditorService.createVariant(any(Variant.class))).thenThrow(new DuplicatedVariantException());
-
-        mvc.perform(post(urlVariants)
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(v)))
-                .andExpect(status().isBadRequest());
-    }
-
     private void checkResultData(Variant v, ResultActions action) throws Exception {
         action
-//                .andExpect(jsonPath("$.position", is(v.getPosition().intValue())))
-//                .andExpect(jsonPath("$.alteration", is(v.getAlteration())))
-//                .andExpect(jsonPath("$.chromosome", is(v.getChromosome())))
+                .andExpect(jsonPath("$.position", is(v.getPosition().intValue())))
+                .andExpect(jsonPath("$.alteration", is(v.getAlteration())))
+                .andExpect(jsonPath("$.chromosome", is(v.getChromosome())))
                 .andExpect(jsonPath("$.opis", is(v.getOpis())))
         ;
     }

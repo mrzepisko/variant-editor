@@ -1,6 +1,7 @@
 package io.github.mrzepisko.varianteditor.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -24,26 +27,31 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints =
 @UniqueConstraint(columnNames = {"position", "alteration", "chromosome"}))
-public class Variant {
+public class Variant implements VariantView.Extra {
     @Id @GeneratedValue
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonView(VariantView.Aggr.class)
     private Long id;
-    @NonNull @Column(nullable = false, updatable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Long position;
 
     @NonNull @Column(nullable = false, updatable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
+    @JsonView(VariantView.Basic.class)
+    private Long position;
+    @NonNull @Column(nullable = false, updatable = false)
+    @NotNull @NotEmpty
+    @JsonView(VariantView.Basic.class)
     private String alteration;
     @NonNull @Column(nullable = false, updatable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull @NotEmpty
+    @JsonView(VariantView.Basic.class)
     private String chromosome;
     @NonNull @Column(nullable = false, updatable = false)
+    @JsonView(VariantView.Aggr.class)
     private String opis;
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(VariantView.Extra.class)
     private User user;
 }

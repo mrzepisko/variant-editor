@@ -4,11 +4,9 @@ import io.github.mrzepisko.varianteditor.dao.UserRepository;
 import io.github.mrzepisko.varianteditor.dao.VariantRepository;
 import io.github.mrzepisko.varianteditor.model.User;
 import io.github.mrzepisko.varianteditor.model.Variant;
-import io.github.mrzepisko.varianteditor.web.DuplicatedVariantException;
 import io.github.mrzepisko.varianteditor.web.UserNotFoundException;
 import io.github.mrzepisko.varianteditor.web.VariantNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,12 +44,8 @@ public class VariantEditorServiceImpl implements VariantEditorService {
     }
 
     @Override
-    public Variant createVariant(Variant variant) throws DuplicatedVariantException {
-        try {
+    public Variant createVariant(Variant variant) {
             return variantRepository.save(variant);
-        } catch (DataIntegrityViolationException ex) {
-            throw new DuplicatedVariantException();
-        }
     }
 
     @Override

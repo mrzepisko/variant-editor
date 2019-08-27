@@ -5,7 +5,6 @@ import io.github.mrzepisko.varianteditor.dao.UserRepository;
 import io.github.mrzepisko.varianteditor.dao.VariantRepository;
 import io.github.mrzepisko.varianteditor.model.User;
 import io.github.mrzepisko.varianteditor.model.Variant;
-import io.github.mrzepisko.varianteditor.web.DuplicatedVariantException;
 import io.github.mrzepisko.varianteditor.web.UserNotFoundException;
 import io.github.mrzepisko.varianteditor.web.VariantNotFoundException;
 import org.junit.Assert;
@@ -17,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
@@ -30,7 +28,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -74,7 +71,7 @@ public class VariantEditorServiceImplTest extends AbstractServiceTest {
     }
 
     @Test
-    public void createTest() throws DuplicatedVariantException {
+    public void createTest() {
         when(variantRepository.save(any(Variant.class)))
                 .thenAnswer((Answer<Variant>) i -> (Variant) i.getArgument(0));
 
@@ -85,14 +82,6 @@ public class VariantEditorServiceImplTest extends AbstractServiceTest {
         Assert.assertEquals(variant.getPosition(), result.getPosition());
         Assert.assertEquals(variant.getAlteration(), result.getAlteration());
         Assert.assertEquals(variant.getOpis(), result.getOpis());
-    }
-
-    @Test(expected = DuplicatedVariantException.class)
-    public void createExceptionTest() throws DuplicatedVariantException {
-        when(variantRepository.save(any(Variant.class)))
-                .thenThrow(new DataIntegrityViolationException(""));
-
-        service.createVariant(mock(Variant.class));
     }
 
     @Test

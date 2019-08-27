@@ -27,7 +27,6 @@ public class VariantController {
 
     @PostMapping("/variants")
     @ResponseStatus(HttpStatus.CREATED)
-    @JsonView(VariantView.Basic.class)
     private Variant newVariant(@RequestBody @Valid Variant newVariant) {
         return service.createVariant(newVariant);
     }
@@ -39,13 +38,11 @@ public class VariantController {
     }
 
     @GetMapping("/variants/{id}")
-    @JsonView(VariantView.Extra.class)
     private Variant getVariant(@PathVariable Long id) throws VariantNotFoundException {
         return service.find(id).orElseThrow(VariantNotFoundException::new);
     }
 
     @PutMapping("/variants/{id}/assign")
-    @JsonView(VariantView.Extra.class)
     private Variant assignVariant(@PathVariable Long id, String userIdentifier) throws VariantNotFoundException, UserNotFoundException {
         return service.assignVariant(id, userIdentifier);
     }

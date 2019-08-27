@@ -29,11 +29,14 @@ public class Variant {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     @NonNull @Column(nullable = false, updatable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long position;
 
     @NonNull @Column(nullable = false, updatable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String alteration;
     @NonNull @Column(nullable = false, updatable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String chromosome;
     @NonNull @Column(nullable = false, updatable = false)
     private String opis;

@@ -24,6 +24,6 @@ public class UserController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public User newUser(@Valid RegistrationForm password) {
-        return userService.register(password.getPassword());
+        return userService.registerUser(password.getPassword());
     }
 }

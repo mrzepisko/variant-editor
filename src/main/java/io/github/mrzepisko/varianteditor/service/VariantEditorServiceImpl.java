@@ -37,7 +37,7 @@ public class VariantEditorServiceImpl implements VariantEditorService {
     }
 
     @Override
-    public User register(String password) {
+    public User registerUser(String password) {
         User user = new User();
         user.setIdentifier(generateUniqueIdentifier());
         user.setPassword(passwordEncoder.encode(password));
@@ -46,7 +46,7 @@ public class VariantEditorServiceImpl implements VariantEditorService {
     }
 
     @Override
-    public Variant create(Variant variant) throws DuplicatedVariantException {
+    public Variant createVariant(Variant variant) throws DuplicatedVariantException {
         try {
             return variantRepository.save(variant);
         } catch (DataIntegrityViolationException ex) {

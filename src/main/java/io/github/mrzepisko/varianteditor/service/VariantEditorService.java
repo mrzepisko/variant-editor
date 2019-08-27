@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VariantEditorService {
-    User register(String password);
-    Variant create(Variant variant) throws DuplicatedVariantException;
+    User registerUser(String password);
+    Variant createVariant(Variant variant) throws DuplicatedVariantException;
 
     Variant assignVariant(Long variantId, String userIdentifier) throws VariantNotFoundException, UserNotFoundException;
     List<Variant> getUserVariants();

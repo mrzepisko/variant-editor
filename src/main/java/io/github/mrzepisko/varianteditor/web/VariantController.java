@@ -25,7 +25,7 @@ public class VariantController {
     @PostMapping("/variants")
     @ResponseStatus(HttpStatus.CREATED)
     private Variant newVariant(@RequestBody Variant newVariant) throws DuplicatedVariantException {
-        return service.create(newVariant);
+        return service.createVariant(newVariant);
     }
 
     @GetMapping("/variants")

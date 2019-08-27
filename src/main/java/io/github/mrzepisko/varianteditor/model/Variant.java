@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(uniqueConstraints =
 @UniqueConstraint(columnNames = {"position", "alteration", "chromosome"}))
-public class Variant implements VariantView.Extra {
+public class Variant implements VariantView.Basic {
     @Id @GeneratedValue
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonView(VariantView.Aggr.class)
@@ -52,6 +52,6 @@ public class Variant implements VariantView.Extra {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn
-    @JsonView(VariantView.Extra.class)
+    @JsonView(VariantView.Basic.class)
     private User user;
 }

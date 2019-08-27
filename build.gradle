@@ -4,61 +4,6 @@ plugins {
 	id 'java'
 }
 
-//jar {
-//	def props = new Properties()
-//	source.each {
-//		println it
-//	}
-//	filter(ReplaceTokens, tokens: ['exception.duplicated.variant','asdasdasd'])
-//	from (source) {
-//		println
-//		println "wtf"
-//		include "*"//"**/*.properties"
-//	}.each {
-//		println it
-//	}
-//	source.each {
-//		println it
-//	}
-//	def props = new Properties()
-//	fileTree("src/main").matching {
-//		include "**/*.properties"
-//	}.each {
-//		println it
-//		it.withInputStream {
-//			props.load(it)
-//		}
-//	}
-//	from('src/main/java') {
-//		include("**/*.class")
-//		filter(ReplaceTokens, tokens: ['exception.not_found.user': 'ok'])
-//	}
-//}
-
-//processResources {
-//	println '******* copy *******'
-//	def props = new Properties()
-//	fileTree("/src/main").matching {
-//		include "**/*.properties"
-//	}.each {
-//		println it
-//		it.withInputStream {
-//			props.load(it)
-//		}
-//	}
-//	println "ok"
-//	filter(ReplaceTokens, tokens: props)
-//}
-compileJava {
-	fileTree("scr/main").matching {
-		include "**/*.properties"
-	}.each {
-		println it
-	}
-	source.each {
-	}
-}
-
 group = 'io.github.mrzepisko'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'

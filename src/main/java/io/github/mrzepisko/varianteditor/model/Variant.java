@@ -26,6 +26,7 @@ import javax.persistence.UniqueConstraint;
 @UniqueConstraint(columnNames = {"position", "alteration", "chromosome"}))
 public class Variant {
     @Id @GeneratedValue
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     @NonNull @Column(nullable = false, updatable = false)
     private Long position;

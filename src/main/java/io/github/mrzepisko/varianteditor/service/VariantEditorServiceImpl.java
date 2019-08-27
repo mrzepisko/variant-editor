@@ -4,11 +4,13 @@ import io.github.mrzepisko.varianteditor.dao.UserRepository;
 import io.github.mrzepisko.varianteditor.dao.VariantRepository;
 import io.github.mrzepisko.varianteditor.model.User;
 import io.github.mrzepisko.varianteditor.model.Variant;
+import io.github.mrzepisko.varianteditor.web.DuplicatedVariantException;
+import io.github.mrzepisko.varianteditor.web.UserNotFoundException;
 import io.github.mrzepisko.varianteditor.web.VariantNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,14 +46,18 @@ public class VariantEditorServiceImpl implements VariantEditorService {
     }
 
     @Override
-    public Variant create(Variant variant) {
-        return variantRepository.save(variant);
+    public Variant create(Variant variant) throws DuplicatedVariantException {
+        try {
+            return variantRepository.save(variant);
+        } catch (DataIntegrityViolationException ex) {
+            throw new DuplicatedVariantException();
+        }
     }
 
     @Override
-    public Variant assignVariant(Long variantId, String userIdentifier) throws VariantNotFoundException {
+    public Variant assignVariant(Long variantId, String userIdentifier) throws VariantNotFoundException, UserNotFoundException {
         User user = userRepository.findByIdentifier(userIdentifier)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("User not found %s", userIdentifier)));
+                .orElseThrow(UserNotFoundException::new);
         Variant variant = find(variantId).orElseThrow(VariantNotFoundException::new);
         variant.setUser(user);
 

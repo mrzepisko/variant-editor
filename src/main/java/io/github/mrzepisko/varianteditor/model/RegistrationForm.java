@@ -16,6 +16,7 @@ public class RegistrationForm {
     @NonNull
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "(?=.*\\d).{8,}")
+    @Pattern(regexp = "(?=.*\\d).{8,}",
+            message = "@validation.user.password.invalid@")
     private String password;
 }

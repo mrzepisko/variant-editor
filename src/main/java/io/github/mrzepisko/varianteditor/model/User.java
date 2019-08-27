@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 public class User {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Id @GeneratedValue private Long id;
 
     @NonNull @Column(nullable = false, unique = true)

@@ -2,13 +2,14 @@ package io.github.mrzepisko.varianteditor.web;
 
 import io.github.mrzepisko.varianteditor.model.Variant;
 import io.github.mrzepisko.varianteditor.service.VariantEditorService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class VariantController {
     }
 
     @PostMapping("/variants")
-    private Variant newVariant(@RequestBody Variant newVariant) {
+    @ResponseStatus(HttpStatus.CREATED)
+    private Variant newVariant(@RequestBody Variant newVariant) throws DuplicatedVariantException {
         return service.create(newVariant);
     }
 
@@ -37,7 +39,7 @@ public class VariantController {
     }
 
     @PutMapping("/variants/{id}/assign")
-    private Variant assignVariant(@PathVariable Long id, String userIdentifier) throws VariantNotFoundException, UsernameNotFoundException {
+    private Variant assignVariant(@PathVariable Long id, String userIdentifier) throws VariantNotFoundException, UserNotFoundException {
         return service.assignVariant(id, userIdentifier);
     }
 }
